@@ -12,11 +12,6 @@ public record Periodo(LocalDate inicio, LocalDate fim) {
         return !date.isBefore(this.inicio) && !date.isAfter(this.fim);
     }
 
-    public Periodo {
-        Objects.requireNonNull(inicio);
-        Objects.requireNonNull(fim);
-    }
-
     public LocalDate getInicio() {
         return inicio();
     }

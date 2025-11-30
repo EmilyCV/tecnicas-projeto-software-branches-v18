@@ -38,7 +38,8 @@ public abstract class Parceiro {
     @Column(name = "TELEFONE_CONTATO")
     private String telefoneContato;
 
-    @Column(name = "EMAIL_CONTATO")
-    private String emailContato;
+    @Embedded
+    @AttributeOverride(name = "endereco", column = @Column(name = "EMAIL_CONTATO"))
+    private Email emailContato;
 }
 
