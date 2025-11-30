@@ -1,0 +1,27 @@
+package com.pece.agencia.api.veiculo.internal.domain;
+
+
+import com.pece.agencia.api.common.hibernate.UuidV7BasedID;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
+import java.util.UUID;
+
+@Table(name = "CODIGO_PLATAFORMA_LOCACAO_VEICULO_MAPPING")
+@Data
+@Entity
+public class CodigoPlataformaLocacaoVeiculoMapping {
+    @Id
+    @UuidV7BasedID
+    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "ID")
+    private UUID id;
+
+    @Column(name = "CODIGO_PLATAFORMA_LOCACAO_VEICULO")
+    private String codigoPlataformaLocacaoVeiculo;
+}
