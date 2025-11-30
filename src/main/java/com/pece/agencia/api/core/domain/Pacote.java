@@ -38,22 +38,20 @@ public class Pacote {
     @JoinColumn(name = "PACOTE_ID")
     private List<Oferta> ofertas;
 
-    @Column(name="DURACAO_VIAGEM")
+    @Column(name = "DURACAO_VIAGEM")
     private int duracaoViagem;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TIPO_DESCONTO")
     private TipoDesconto tipoDesconto;
 
-    @ManyToOne
-    @JoinColumn(name = "VALIDADE_ID")
+    @Embedded
+    @AttributeOverride(name = "inicio", column = @Column(name = "INICIO_VALIDADE"))
+    @AttributeOverride(name = "fim", column = @Column(name = "FIM_VALIDADE"))
     private Periodo validade;
 
     public Periodo periodoViagemIniciandoEm(LocalDate dataIda) {
-        Periodo periodoViagem = new Periodo();
-        periodoViagem.setInicio(dataIda);
-        periodoViagem.setFim(dataIda.plusDays(getDuracaoViagem()));
-        return periodoViagem;
+        return new Periodo(dataIda, dataIda.plusDays(getDuracaoViagem()));
     }
 
     public boolean expiradoEm(LocalDate date) {
@@ -76,7 +74,7 @@ public class Pacote {
         if (this.tipoDesconto == TipoDesconto.FIXO) {
             return getPrecoBase() * percentualDesconto;
         } else if (this.tipoDesconto == TipoDesconto.POR_ANTECIPACAO) {
-            long diasAntecedencia = java.time.temporal.ChronoUnit.DAYS.between(dataCompra, this.validade.getInicio());
+            long diasAntecedencia = java.time.temporal.ChronoUnit.DAYS.between(dataCompra, this.validade.inicio());
             double descontoAjustado = Math.max((diasAntecedencia / 30.0) * percentualDesconto, percentualDesconto);
             return Math.max(0, descontoAjustado * percentualDesconto);
         } else {
@@ -86,10 +84,11 @@ public class Pacote {
 
     public <T extends Oferta> T ofertaDoTipo(Class<T> clazz) {
         return (T) ofertas.stream()
-                        .filter(item -> clazz.isInstance(item))
-                        .findFirst()
-                        .orElse(null);
+                .filter(item -> clazz.isInstance(item))
+                .findFirst()
+                .orElse(null);
     }
+
     public double getValorTotalAPagar() {
         return getPrecoBase() - getValorDescontoPromocional();
     }

@@ -20,7 +20,7 @@ public abstract class ReservaHotelMapper {
 
     @Mapping(source = "parceiroResponsavel.nome", target = "nomeHotel")
     @Mapping(source = "parceiroResponsavel.endereco", target = "endereco")
-    @Mapping(source = "parceiroResponsavel.emailContato", target = "email")
+    @Mapping(source = "parceiroResponsavel.emailContato.endereco", target = "email")
     @Mapping(source = "parceiroResponsavel.telefoneContato", target = "telefone")
     @Mapping(source = "ofertaHospedagem", target = "idPlataforma")
 

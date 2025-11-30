@@ -12,10 +12,10 @@ import org.mapstruct.Mapping;
         }
 )
 public interface CompraMapper {
-    @Mapping(target = "reservaVooIda", source = "reservaVooIda.ETicket")
+    @Mapping(target = "reservaVooIda", source = "reservaVooIda.eticket")
     @Mapping(target = "assentoVooIda", source = "reservaVooIda.assento")
     @Mapping(target = "embarqueVooIda", source = "reservaVooIda.horarioEmbarque")
-    @Mapping(target = "reservaVooVolta", source = "reservaVooVolta.ETicket")
+    @Mapping(target = "reservaVooVolta", source = "reservaVooVolta.eticket")
     @Mapping(target = "assentoVooVolta", source = "reservaVooVolta.assento")
     @Mapping(target = "embarqueVooVolta", source = "reservaVooVolta.horarioEmbarque")
     @Mapping(target = "pacote", source = "pacoteContratado")

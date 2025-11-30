@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 )
 public interface HospedeMapper {
     @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "email", target = "email")
+    @Mapping(source = "email.endereco", target = "email")
     @Mapping(source = "dataNascimento", target = "dataNascimento")
     Hospede toHospede(Cliente cliente);
 }

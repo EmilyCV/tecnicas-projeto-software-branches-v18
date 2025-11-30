@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 )
 public interface TransladoAereoItemMapper {
     @Mapping(source = "parceiroResponsavel.nome", target = "nomeCompanhia")
-    @Mapping(source = "parceiroResponsavel.emailContato", target = "email")
+    @Mapping(source = "parceiroResponsavel.emailContato.endereco", target = "email")
     @Mapping(source = "parceiroResponsavel.telefoneContato", target = "telefone")
     @Mapping(source = "vooIda.numero", target = "vooIdaNumero")
     @Mapping(source = "vooIda.horario", target = "vooIdaHora")

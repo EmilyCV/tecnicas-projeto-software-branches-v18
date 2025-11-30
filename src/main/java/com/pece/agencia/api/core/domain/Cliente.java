@@ -22,8 +22,11 @@ public class Cliente {
     private String nome;
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
-    @Column(name = "EMAIL")
-    private String email;
+
+    @Embedded
+    @AttributeOverride(name = "endereco", column = @Column(name = "EMAIL"))
+    private Email email;
+
     @Column(name = "TELEFONE")
     private String telefone;
 
@@ -33,7 +36,7 @@ public class Cliente {
     @AttributeOverride(name = "numero", column = @Column(name = "NUMERO"))
     @AttributeOverride(name = "complemento", column = @Column(name = "COMPLEMENTO"))
     @AttributeOverride(name = "bairro", column = @Column(name = "BAIRRO"))
-    @AssociationOverride(name = "localidade", joinColumns =  @JoinColumn(name = "LOCALIDADE_ID"))
+    @AssociationOverride(name = "localidade", joinColumns = @JoinColumn(name = "LOCALIDADE_ID"))
     private Endereco endereco;
 
     public Contratacao contratar(Pacote pacote, LocalDate inicioViagem) {

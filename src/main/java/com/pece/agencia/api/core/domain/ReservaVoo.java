@@ -1,35 +1,31 @@
 package com.pece.agencia.api.core.domain;
 
-import com.pece.agencia.api.common.hibernate.UuidV7BasedID;
-import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.JdbcTypeCode;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 
-import java.sql.Types;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-@Entity
-@Table(name = "RESERVA_VOO")
-@Data
-public class ReservaVoo {
+@Embeddable
+public record ReservaVoo(
+        String eticket,
+        String assento,
+        LocalDateTime horarioEmbarque,
+        @Embedded
+        DadosVoo dadosVoo
+) {
+    public String getETicket() {
+        return eticket();
+    }
 
-    @Id
-    @UuidV7BasedID
-    @JdbcTypeCode(Types.VARCHAR)
-    @Column(name = "ID")
-    private UUID id;
+    public String getAssento() {
+        return assento();
+    }
 
-    @Column(name = "ETICKET")
-    private String eTicket;
+    public LocalDateTime getHorarioEmbarque() {
+        return horarioEmbarque();
+    }
 
-    @Column(name = "ASSENTO")
-    private String assento;
-
-    @Column(name = "HORARIO_EMBARQUE")
-    private LocalDateTime horarioEmbarque;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "DADOS_VOO_ID")
-    private DadosVoo dadosVoo;
+    public DadosVoo getDadosVoo() {
+        return dadosVoo();
+    }
 }

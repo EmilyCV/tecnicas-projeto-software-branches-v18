@@ -25,8 +25,9 @@ public class Contratacao {
     @JoinColumn(name="PACOTE_CONTRATADO_ID")
     private Pacote pacoteContratado;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="PERIODO_VIAGEM_ID")
+    @Embedded
+    @AttributeOverride(name = "inicio", column = @Column(name = "INICIO_PERIODO_VIAGEM"))
+    @AttributeOverride(name = "fim", column = @Column(name = "FIM_PERIODO_VIAGEM"))
     private Periodo periodoViagem;
 
     @Column(name = "MOMENTO_COMPRA")
@@ -42,12 +43,20 @@ public class Contratacao {
     @Column(name = "RESERVA_HOTEL")
     private String reservaHotel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "RESERVA_VOO_IDA_ID")
+    @Embedded
+    @AttributeOverride(name = "eticket", column = @Column(name = "ETICKET_RESERVA_IDA"))
+    @AttributeOverride(name = "assento", column = @Column(name = "ASSENTO_RESERVA_IDA"))
+    @AttributeOverride(name = "horarioEmbarque", column = @Column(name = "HORARIO_EMBARQUE_RESERVA_IDA"))
+    @AttributeOverride(name = "dadosVoo.numero", column = @Column(name = "NUMERO_VOO_RESERVA_IDA"))
+    @AttributeOverride(name = "dadosVoo.horario", column = @Column(name = "HORARIO_VOO_RESERVA_IDA"))
     private ReservaVoo reservaVooIda;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "RESERVA_VOO_VOLTA_ID")
+    @Embedded
+    @AttributeOverride(name = "eticket", column = @Column(name = "ETICKET_RESERVA_VOLTA"))
+    @AttributeOverride(name = "assento", column = @Column(name = "ASSENTO_RESERVA_VOLTA"))
+    @AttributeOverride(name = "horarioEmbarque", column = @Column(name = "HORARIO_EMBARQUE_RESERVA_VOLTA"))
+    @AttributeOverride(name = "dadosVoo.numero", column = @Column(name = "NUMERO_VOO_RESERVA_VOLTA"))
+    @AttributeOverride(name = "dadosVoo.horario", column = @Column(name = "HORARIO_VOO_RESERVA_VOLTA"))
     private ReservaVoo reservaVooVolta;
 
     @Column(name = "LOCALIZADOR_RESERVA_VEICULO")
