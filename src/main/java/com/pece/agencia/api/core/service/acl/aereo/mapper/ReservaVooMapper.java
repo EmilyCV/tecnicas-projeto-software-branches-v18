@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
         }
 )
 public interface ReservaVooMapper {
-    @Mapping(source = "eTicket", target = "ETicket")
+    @Mapping(source = "eTicket", target = "eticket")
     @Mapping(source = "assento", target = "assento")
     @Mapping(source = "horarioEmbarque", target = "horarioEmbarque")
     @Mapping(source = "dadosVoo", target = "dadosVoo")

@@ -9,12 +9,14 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OfertaTransladoAereo extends Oferta<CompanhiaAereaParceira> {
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "VOO_IDA_ID")
+    @Embedded
+    @AttributeOverride(name = "numero", column = @Column(name = "VOO_IDA_NUMERO"))
+    @AttributeOverride(name = "horario", column = @Column(name = "VOO_IDA_HORARIO"))
     private DadosVoo vooIda;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "VOO_VOLTA_ID")
+    @Embedded
+    @AttributeOverride(name = "numero", column = @Column(name = "VOO_VOLTA_NUMERO"))
+    @AttributeOverride(name = "horario", column = @Column(name = "VOO_VOLTA_HORARIO"))
     private DadosVoo vooVolta;
 
     @ManyToOne(fetch = FetchType.EAGER)

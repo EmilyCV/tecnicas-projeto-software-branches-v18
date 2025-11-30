@@ -55,8 +55,8 @@ public class ContratacaoService {
         contratacao.setReservaHotel(this.reservaHospedagemService.reservar(contratacao.getPacoteContratado().ofertaDoTipo(OfertaHospedagem.class), cliente, contratacao.getPeriodoViagem()));
         contratacao.setLocalizadorReservaVeiculo(this.locacaoVeiculoService.locar(contratacao.getPacoteContratado().ofertaDoTipo(OfertaLocacaoVeiculo.class), cliente, pacote.getDestino(), contratacao.getPeriodoViagem()));
 
-        contratacao.setReservaVooIda(this.reservaTransladoAereoService.reservar(contratacao.getCliente(), ofertaTransladoAereo.getVooIda(), contratacao.getPeriodoViagem().getInicio()));
-        contratacao.setReservaVooVolta(this.reservaTransladoAereoService.reservar(contratacao.getCliente(), ofertaTransladoAereo.getVooVolta(), contratacao.getPeriodoViagem().getFim()));
+        contratacao.setReservaVooIda(this.reservaTransladoAereoService.reservar(contratacao.getCliente(), ofertaTransladoAereo.getVooIda(), contratacao.getPeriodoViagem().inicio()));
+        contratacao.setReservaVooVolta(this.reservaTransladoAereoService.reservar(contratacao.getCliente(), ofertaTransladoAereo.getVooVolta(), contratacao.getPeriodoViagem().fim()));
 
         this.contratacaoRepository.save(contratacao);
 
