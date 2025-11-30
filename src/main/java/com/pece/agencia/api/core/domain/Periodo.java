@@ -3,7 +3,6 @@ package com.pece.agencia.api.core.domain;
 import jakarta.persistence.Embeddable;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Embeddable
 public record Periodo(LocalDate inicio, LocalDate fim) {
